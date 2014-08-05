@@ -1,13 +1,16 @@
 # User Types
+
 * Owner of the books
 
 # Stories
 
 ## Owner Adds New Book
+
 > As an owner, I want to add new books to my collection so I can
 > keep track of my personal library
 
 ### Acceptance Criteria
+
 * Owner selects 1 and sees output "Let's Add a New Book"
 * Owner is prompted for input to the following questions:
   * Title?
@@ -24,6 +27,7 @@
     => 1. Add a new book
     => 2. Find books
     => 3. Update a book
+    => 4. Mark book as read
     "1"
     => Let's add a new book!
     => Title?
@@ -52,11 +56,13 @@ will be displayed.
 * Owner can select a number that corresponds to a book and view its details.
 
 ### Usage Example
+
     ./bookbank
     => What would you like to do?
     => 1. Add a new book
     => 2. Find books
     => 3. Update a book
+    => 4. Mark book as read
     "2"
     => How would you like to search?
     => 1. By title
@@ -88,11 +94,13 @@ will be displayed.
 * Information is updated and owner sees a success message: #{title} by #{author} has been updated!
 
 ### Usage Example
+
     ./bookbank
     => What would you like to do?
     => 1. Add a new book
     => 2. Find books
     => 3. Update a book
+    => 4. Mark book as read
     "3"
     => Please enter the title you would like to update
     "The Great Gatsby"
@@ -103,8 +111,35 @@ will be displayed.
     => 2. Author
     => 3. Genre
     => 4. Description
-    => 5. 'Is Read?' Status
-    "5"
-    => Have you read The Great Gatsby? Y/N
-    "Y"
+    "3"
+    => Please enter the updated genre
+    "fiction"
     => The Great Gatsby by F. Scott Fitzgerald has been updated!
+
+## Owner Updates 'is read?' status
+
+> As an owner, I want to mark a book as read once I have finished it.
+
+### Acceptance Criteria
+
+* Owner selects 4 and is prompted to enter the title and author.
+* Owner is asked "Have you read this book? Y/N".
+* Owner responds "Y" if read or "N" if not.
+* Owner sees success message "#{title} by #{author} has been marked as read/not read"
+
+### Usage Example
+
+    ./bookbank
+    => What would you like to do?
+    => 1. Add a new book
+    => 2. Find books
+    => 3. Update a book
+    => 4. Mark book as read
+    "4"
+    => Please enter the title you would like to update
+    "The Great Gatsby"
+    => Please enter the author of this title
+    "F. Scott Fitzgerald"
+    => Have you read this book? Y/N
+    "Y"
+    => The Great Gatby by F. Scott Fitzgerald has been marked as read.
