@@ -8,3 +8,7 @@ require_relative 'lib/router'
 def clean_gets
   (gets || "").chomp
 end
+
+puts "What would you like to do?\n1. Add a new book\n2. Find a book\n3. Update a book\n4. Mark book as read"
+
+Router.select_path
