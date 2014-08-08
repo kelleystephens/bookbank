@@ -14,6 +14,18 @@ class Router
 
   def self.add_book
     puts "Let's add a book!"
+    books_controller = BooksController.new()
+    books_controller.add
+    authors_controller = AuthorsController.new()
+    authors_controller.add
+    # puts "What is the title?"
+    # title = clean_gets
+    # puts "What is the author?"
+    # author = clean_gets
+    # f_name = author.split(" ")[0]
+    # l_name = author.split(" ")[1]
+    # Author.create(f_name: f_name, l_name: l_name)
+    # Book.create(title: title)
   end
 
   def self.find_book
