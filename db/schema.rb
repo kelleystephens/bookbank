@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140807132400) do
+ActiveRecord::Schema.define(version: 20140811115200) do
 
   create_table "authors", force: true do |t|
     t.string "f_name"
@@ -29,13 +29,13 @@ ActiveRecord::Schema.define(version: 20140807132400) do
   end
 
   create_table "books", force: true do |t|
-    t.string  "title"
-    t.text    "description"
-    t.boolean "read"
+    t.string "title"
+    t.text   "description"
+    t.string "is_read"
   end
 
   create_table "genres", force: true do |t|
-    t.string "type"
+    t.string "name"
   end
 
 end
