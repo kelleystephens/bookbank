@@ -13,9 +13,9 @@ RSpec.describe "BookBank Main Menu", :integration do
     end
   end
 
-  context "an correct command is entered" do
+  context "a correct command is entered" do
     it "prints an informative message for option 1" do
-      actual = run_bookbank_with_input("1", "Carrie", "Stephen King", "Horror")
+      actual = run_bookbank_with_input("1", "Carrie", "Stephen King", "Horror", "Y")
       expected = "Let's add a book!"
       expect(actual).to include(expected)
     end
@@ -30,7 +30,8 @@ RSpec.describe "BookBank Main Menu", :integration do
       expect(actual).to include(expected)
     end
     it "prints an informative message for option 4" do
-      actual = run_bookbank_with_input('4')
+      run_bookbank_with_input("1", "Carrie", "Stephen King", "Horror", "n")
+      actual = run_bookbank_with_input("4", "Carrie", "Stephen King", "Y")
       expected = "Let's mark a book as read!"
       expect(actual).to include(expected)
     end

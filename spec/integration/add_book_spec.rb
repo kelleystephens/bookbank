@@ -1,5 +1,5 @@
 RSpec.describe "Add a book", :integration do
-  let!(:output){ run_bookbank_with_input("1", "Carrie", "Stephen King", "Horror", "The Shining is a horror novel by American author Stephen King.", "Y") }
+  let!(:output){ run_bookbank_with_input("1", "Carrie", "stephen king", "Horror", "The Shining is a horror novel by American author Stephen King.", "Y") }
   context "create a book with a title" do
     it "should create a new book" do
       expect(Book.count).to eq 1
@@ -16,8 +16,7 @@ RSpec.describe "Add a book", :integration do
     end
 
     it "should have the correct name" do
-      expect(Author.last.f_name).to eq "Stephen"
-      expect(Author.last.l_name).to eq "King"
+      expect(Author.last.name).to eq "Stephen King"
     end
 
     it "should connect the author and the book" do
@@ -46,6 +45,12 @@ RSpec.describe "Add a book", :integration do
 
     it "should update the read status" do
       expect(Book.last.is_read).to eq "y"
+    end
+  end
+
+  context "print success message" do
+    it "should print that the book was saved" do
+      expect(output).to include "Carrie has been added to your library!"
     end
   end
 end

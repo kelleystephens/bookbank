@@ -12,6 +12,8 @@ class Router
     end
   end
 
+# Adding a book
+
   def self.add_book
     puts "Let's add a book!"
     puts "What is the title?"
@@ -21,6 +23,7 @@ class Router
     add_author(book)
     add_genre(book)
     add_others(books_controller)
+    puts "#{book.title} has been added to your library!"
   end
 
   def self.add_author(book)
@@ -46,15 +49,29 @@ class Router
     books_controller.is_read?
   end
 
+# Finding book(s)
+
   def self.find_book
     puts "Let's find a book!"
   end
+
+# Editing a book
 
   def self.edit_book
     puts "Let's edit a book!"
   end
 
+# Marking book as read
+
   def self.update_read_status
     puts "Let's mark a book as read!"
+    puts "What is the title?"
+    title = clean_gets
+    puts "Who is the author"
+    author = clean_gets
+    books_controller = BooksController.new()
+    book = books_controller.find_book(title, author)
+    puts "Have you read this book? (Y/N)"
+    books_controller.update_is_read(book)
   end
 end

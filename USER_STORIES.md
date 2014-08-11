@@ -18,7 +18,7 @@
   * Genre?
   * Description?
   * Have you read this book? Y/N
-* Displays success message: "#{title} by #{author} has been added to your library!"
+* Displays success message: "#{title} has been added to your library!"
 
 ### Usage Example
 
@@ -40,7 +40,7 @@
     "Told entirely in the language of the energetic, pragmatic five-year-old Jack, ROOM is a celebration of resilience and the limitless bond between parent and child, a brilliantly executed novel about what it means to journey from one world to another."
     => Have you read Room? Y/N
     "Y"
-    => Room by Emma Donoghue has been added to your library!
+    => Room has been added to your library!
 
 ## Owner Searches through Their Books
 
@@ -91,7 +91,7 @@ will be displayed.
 * Owner is then asked what it is they would like to update and are given a list:
   * Title, Author, Genre, Description, & Is Read? status
 * Owner selects option and is asked to enter the new information.
-* Information is updated and owner sees a success message: #{title} by #{author} has been updated!
+* Information is updated and owner sees a success message: #{title} has been updated!
 
 ### Usage Example
 
@@ -114,7 +114,7 @@ will be displayed.
     "3"
     => Please enter the updated genre
     "fiction"
-    => The Great Gatsby by F. Scott Fitzgerald has been updated!
+    => The Great Gatsby has been updated!
 
 ## Owner Updates 'is read?' status
 
@@ -125,7 +125,7 @@ will be displayed.
 * Owner selects 4 and is prompted to enter the title and author.
 * Owner is asked "Have you read this book? Y/N".
 * Owner responds "Y" if read or "N" if not.
-* Owner sees success message "#{title} by #{author} has been marked as read/not read"
+* Owner sees success message "#{title} has been marked as read/not read"
 
 ### Usage Example
 
@@ -142,4 +142,4 @@ will be displayed.
     "F. Scott Fitzgerald"
     => Have you read this book? Y/N
     "Y"
-    => The Great Gatby by F. Scott Fitzgerald has been marked as read.
+    => The Great Gatby has been marked as read.
