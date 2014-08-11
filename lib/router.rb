@@ -23,7 +23,8 @@ class Router
     add_author(book)
     add_genre(book)
     add_others(books_controller)
-    puts "#{book.title} has been added to your library!"
+    book_name = book.title.split.map(&:capitalize).join(" ")
+    puts "#{book_name} has been added to your library!"
   end
 
   def self.add_author(book)
@@ -53,6 +54,9 @@ class Router
 
   def self.find_book
     puts "Let's find a book!"
+    puts Book.all.inspect
+    puts "************"
+    puts Author.all.inspect
   end
 
 # Editing a book
@@ -68,9 +72,9 @@ class Router
     puts "What is the title?"
     title = clean_gets
     puts "Who is the author"
-    author = clean_gets
+    author_name = clean_gets
     books_controller = BooksController.new()
-    book = books_controller.find_book(title, author)
+    book = books_controller.find_book(title, author_name)
     puts "Have you read this book? (Y/N)"
     books_controller.update_is_read(book)
   end

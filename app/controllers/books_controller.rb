@@ -13,21 +13,27 @@ class BooksController
   end
 
   def is_read?
-    answer = clean_gets.downcase
+    answer = clean_gets
     book = Book.last
     book.is_read = answer
     book.save
   end
 
   def find_book(title, author_name)
-    author = Author.where(name: author_name).first
-    author.books.where(title: title).first
+    author = Author.where(name: "#{author_name}").first
+    if author
+      author.books.where(title: "#{title}").first
+    else
+      puts "Unable to find book, please try again"
+      Router.update_read_status
+    end
   end
 
   def update_is_read(book)
-    status = clean_gets.downcase
+    book_name = book.title.split.map(&:capitalize).join(" ")
+    status = clean_gets
     book.update(is_read: "#{status}")
-    puts "#{book.title} has been marked as read" if status == "y"
-    puts "#{book.title} has been marked as not read" if status == "n"
+    puts "#{book_name} has been marked as read" if status == "y"
+    puts "#{book_name} has been marked as not read" if status == "n"
   end
 end
