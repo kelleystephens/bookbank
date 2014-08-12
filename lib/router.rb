@@ -72,7 +72,30 @@ class Router
 # Editing a book
 
   def self.edit_book
-    puts "Let's edit a book!"
+    puts "Let's update a book!"
+    puts "What would you like to update?\n1. A book's title\n2. A book's description\n3. An author's name\n4. Add another genre to a book\n5. Add another author to a book"
+    command = clean_gets
+
+    books_controller = BooksController.new()
+    authors_controller = AuthorsController.new()
+
+    case command.to_i
+    when 1, 2, 4, 5
+      puts "What is the book title?"
+      title = clean_gets
+      puts "Who is the author?"
+      author_name = clean_gets
+      book = books_controller.find_book(title, author_name)
+    end
+
+    case command.to_i
+    when 1 then books_controller.update_title(book)
+    when 2 then books_controller.update_description(book)
+    when 3 then authors_controller.update_author_name
+    when 4 then self.add_genre(book)
+    when 5 then self.add_author(book)
+    else puts "I don't know the '#{command}' command."
+    end
   end
 
 # Marking book as read

@@ -26,7 +26,7 @@ RSpec.describe "BookBank Main Menu", :integration do
     end
     it "prints an informative message for option 3" do
       actual = run_bookbank_with_input('3')
-      expected = "Let's edit a book!"
+      expected = "Let's update a book!"
       expect(actual).to include(expected)
     end
     it "prints an informative message for option 4" do
