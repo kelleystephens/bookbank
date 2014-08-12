@@ -4,7 +4,7 @@ RSpec.describe "Update is_read", :integration do
     let!(:output){ run_bookbank_with_input("4", "Carrie", "Stephen King", "Y") }
 
     it "should save as read" do
-      expect(Book.last.is_read).to include "y"
+      expect(Book.last.is_read).to include "Y"
     end
   end
 
@@ -12,7 +12,7 @@ RSpec.describe "Update is_read", :integration do
     let!(:output){ run_bookbank_with_input("4", "Carrie", "Stephen King", "N") }
 
     it "should save as not read" do
-      expect(Book.last.is_read).to include "n"
+      expect(Book.last.is_read).to include "N"
     end
   end
 

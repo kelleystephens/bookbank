@@ -23,15 +23,14 @@ class Router
     add_author(book)
     add_genre(book)
     add_others(books_controller)
-    book_name = book.title.split.map(&:capitalize).join(" ")
+    book_name = book.title
     puts "#{book_name} has been added to your library!"
   end
 
   def self.add_author(book)
     puts "Who is the author?"
     authors_controller = AuthorsController.new()
-    authors_controller.add
-    author = Author.last
+    author = authors_controller.add
     book.authors << author
   end
 
@@ -54,9 +53,20 @@ class Router
 
   def self.find_book
     puts "Let's find a book!"
-    puts Book.all.inspect
-    puts "************"
-    puts Author.all.inspect
+    puts "1. Find All\n2. Search by author\n3. Search by title\n4. Search by genre\n5. Search by is read status"
+
+    books_controller = BooksController.new()
+    authors_controller = AuthorsController.new()
+    genre_controller = GenresController.new()
+    command = clean_gets
+    case command.to_i
+    when 1 then books_controller.find_all
+    when 2 then authors_controller.find_by_author
+    when 3 then books_controller.find_by_title
+    when 4 then find_by_genre
+    when 5 then books_controller.find_by_is_read
+    else puts "I don't know the '#{command}' command."
+    end
   end
 
 # Editing a book

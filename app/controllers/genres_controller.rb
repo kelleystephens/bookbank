@@ -2,6 +2,10 @@ class GenresController
 
   def add
     name = clean_gets
-    Genre.create(name: name)
+    if Genre.where(name: "#{name}").exists?
+      Genre.where(name: "#{name}").first
+    else
+      Genre.create(name: name)
+    end
   end
 end

@@ -40,11 +40,11 @@ RSpec.describe "Add a book", :integration do
 
   context "update remaining book attributes" do
     it "should save the description" do
-      expect(Book.last.description).to eq "The Shining is a horror novel by American author Stephen King."
+      expect(Book.last.description).to eq "The Shining Is A Horror Novel By American Author Stephen King."
     end
 
     it "should update the read status" do
-      expect(Book.last.is_read).to eq "y"
+      expect(Book.last.is_read).to eq "Y"
     end
   end
 

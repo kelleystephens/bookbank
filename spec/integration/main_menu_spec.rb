@@ -9,7 +9,7 @@ RSpec.describe "BookBank Main Menu", :integration do
   context "an incorrect command is entered" do
     let(:output){ run_bookbank_with_input('remove') }
     it "prints an error message" do
-      expect(output).to include("I don't know the 'remove' command.")
+      expect(output).to include("I don't know the 'Remove' command.")
     end
   end
 
