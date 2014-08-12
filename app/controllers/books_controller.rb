@@ -39,7 +39,22 @@ class BooksController
       end
     else
       puts "Unable to find books with the title #{title}, please try again"
-      Router.update_read_status
+      Router.find_book
+    end
+  end
+
+  def find_by_is_read
+    puts "Search books that are: Read or Unread?"
+    status = clean_gets
+    status == "Read" ? status = "Y" : status = "N"
+    books = Book.where(is_read: status).all
+    if books.length >=1
+      books.each_with_index do |book, index|
+        puts "#{index + 1}. #{book.title} by #{book.authors.first.name}"
+      end
+    else
+      puts "Unable to find books that are #{status}, please try again"
+      Router.find_book
     end
   end
 

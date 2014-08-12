@@ -23,19 +23,40 @@ RSpec.describe "Find book(s)", :integration do
       expect(output).not_to include "1. An Untamed State\n2. Lean In"
     end
 
+    it "should give message if author is not in system" do
+      output = run_bookbank_with_input("2", "2", "foo")
+      expect(output).to include "Unable to find books by Foo, please try again"
+    end
+
     it "should search by the title" do
       output = run_bookbank_with_input("2", "3", "Carrie")
       expect(output).to include "1. Carrie by Stephen King"
     end
 
-    it "should search by the genre" do
-      skip
-      let!(:output){ run_bookbank_with_input("2", "4") }
+    it "should give message if title is not in system" do
+      output = run_bookbank_with_input("2", "3", "foo")
+      expect(output).to include "Unable to find books with the title Foo, please try again"
     end
 
-    it "should search by the is_read status" do
-      skip
-      let!(:output){ run_bookbank_with_input("2", "5") }
+    it "should search by the genre" do
+      output = run_bookbank_with_input("2", "4", "fiction")
+      expect(output).to include "1. An Untamed State by Roxanne Gay\n2. The Shining by Stephen King"
+      expect(output).not_to include "Carrie"
+    end
+
+    it "should give message if genre is not in system" do
+      output = run_bookbank_with_input("2", "4", "foo")
+      expect(output).to include "Unable to find books with the genre Foo, please try again"
+    end
+
+    it "should find all the read books" do
+      output = run_bookbank_with_input("2", "5", "read")
+      expect(output).to include "1. An Untamed State by Roxanne Gay\n2. The Shining by Stephen King"
+    end
+
+    it "should find all the unread books" do
+      output = run_bookbank_with_input("2", "5", "not read")
+      expect(output).to include "1. Carrie by Stephen King\n2. Lean In by Sheryl Sandberg"
     end
   end
 end

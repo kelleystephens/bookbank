@@ -57,13 +57,13 @@ class Router
 
     books_controller = BooksController.new()
     authors_controller = AuthorsController.new()
-    genre_controller = GenresController.new()
+    genres_controller = GenresController.new()
     command = clean_gets
     case command.to_i
     when 1 then books_controller.find_all
     when 2 then authors_controller.find_by_author
     when 3 then books_controller.find_by_title
-    when 4 then find_by_genre
+    when 4 then genres_controller.find_by_genre
     when 5 then books_controller.find_by_is_read
     else puts "I don't know the '#{command}' command."
     end

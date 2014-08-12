@@ -8,4 +8,19 @@ class GenresController
       Genre.create(name: name)
     end
   end
+
+  def find_by_genre
+    puts "What is the genre?"
+    name = clean_gets
+    genre = Genre.where(name: name).first
+    if genre
+      books = genre.books.all.order("title asc")
+      books.each_with_index do |book, index|
+        puts "#{index + 1}. #{book.title} by #{book.authors.first.name}"
+      end
+    else
+      puts "Unable to find books with the genre #{name}, please try again"
+      Router.find_book
+    end
+  end
 end

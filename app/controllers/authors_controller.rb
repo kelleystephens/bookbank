@@ -13,14 +13,14 @@ class AuthorsController
     puts "What is the author's name?"
     name = clean_gets
     author = Author.where(name: "#{name}").first
-    books = author.books.all.order("title asc") if author
-    if books.length >= 1
+    if author
+      books = author.books.all.order("title asc")
       books.each_with_index do | book, index |
         puts "#{index + 1}. #{book.title}"
       end
     else
       puts "Unable to find books by #{name}, please try again"
-      Router.find_by_author
+      Router.find_book
     end
   end
 
