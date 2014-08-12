@@ -24,5 +24,19 @@ class AuthorsController
     end
   end
 
+  def update_author_name
+    puts "Who would you like to update?"
+    name = clean_gets
+    author = Author.where(name: name).first
+    if author
+      puts "What would you like to change #{author.name}'s' name to?"
+      new_name = clean_gets
+      author.update(name: new_name)
+      puts "#{author.name} has been updated!"
+    else
+      puts "No author #{name}"
+      Router.edit_book
+    end
+  end
 
 end
