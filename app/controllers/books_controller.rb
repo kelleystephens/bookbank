@@ -8,7 +8,7 @@ class BooksController
   def delete_book(title, author_name)
     book = Author.where(name: author_name).first.books.where(title: title).first
     book.destroy
-    puts "#{book.name} by #{book.authors.name.first} has been deleted"
+    puts "Book deleted!"
   end
 
   def describe

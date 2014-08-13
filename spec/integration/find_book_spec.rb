@@ -13,8 +13,8 @@ RSpec.describe "Find book(s)", :integration do
     let!(:book3){ run_bookbank_with_input("1", "An Untamed State", "Roxanne Gay", "Fiction", "the kidnapping of the daughter of a very rich man in Haiti.", "y") }
     let!(:book4){ run_bookbank_with_input("1", "The Shining", "Stephen King", "Fiction", "Family in hotel, dad goes crazy", "y") }
     it "should find and display all" do
-      output = run_bookbank_with_input("2", "1")
-      expect(output).to include "1. An Untamed State\n2. Carrie\n3. Lean In\n4. The Shining"
+      output = run_bookbank_with_input("2", "1", "1")
+      expect(output).to include "1. An Untamed State by Roxanne Gay\n2. Carrie by Stephen King\n3. Lean In by Sheryl Sandberg\n4. The Shining by Stephen King"
     end
 
     it "should search by the author" do
