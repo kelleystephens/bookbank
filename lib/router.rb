@@ -8,6 +8,7 @@ class Router
     when 2 then find_book
     when 3 then edit_book
     when 4 then update_read_status
+    when 5 then delete_book
     else puts "I don't know the '#{command}' command."
     end
   end
@@ -112,3 +113,13 @@ class Router
     books_controller.update_is_read(book)
   end
 end
+
+# Delete a book
+  def delete_book
+    puts "What is the title of the movie you would like to delete?"
+    title = clean_gets
+    puts "Who is the author?"
+    author_name = clean_gets
+    books_controller = BooksController.new()
+    books_controller.delete_book(title, author_name)
+  end

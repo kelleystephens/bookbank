@@ -9,6 +9,6 @@ def clean_gets
   (gets || "").chomp.split.map(&:capitalize).join(" ")
 end
 
-puts "What would you like to do?\n1. Add a new book\n2. Find a book\n3. Update a book\n4. Mark book as read"
+puts "What would you like to do?\n1. Add a new book\n2. Find a book\n3. Update a book\n4. Mark book as read\n5. Delete book"
 
 Router.select_path

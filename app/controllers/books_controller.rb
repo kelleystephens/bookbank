@@ -5,6 +5,12 @@ class BooksController
     Book.create(title: title)
   end
 
+  def delete_book(title, author_name)
+    book = Author.where(name: author_name).first.books.where(title: title).first
+    book.destroy
+    puts "#{book.name} by #{book.authors.name.first} has been deleted"
+  end
+
   def describe
     description = clean_gets
     book = Book.last
@@ -16,21 +22,35 @@ class BooksController
     books = Book.all.order("title asc")
     if books.length >=1
       books.each_with_index do | book, index |
-        puts "#{index + 1}. #{book.title}"
+        puts "#{index + 1}. #{book.title} by #{book.authors.first.name}"
       end
+      route("all", nil)
     else
       puts "Sorry, no books were found"
     end
   end
 
   def find_book(title, author_name)
-    author = Author.where(name: "#{author_name}").first
+    author = Author.where(name: author_name).first
     if author
-      author.books.where(title: "#{title}").first
+      author.books.where(title: title).first
     else
       puts "Unable to find book, please try again"
-      Router.update_read_status
+      Router.update_edit_book
     end
+  end
+
+  def find_by_index(command, find_by, name)
+    case find_by
+    when "all" then books = Book.all.order("title asc")
+    when "author" then books = Author.where(name: name).first.books.order("title asc")
+    when "title" then books = Book.where(title: name)
+    when "genre" then books = Genre.where(name: name).first.books.order("title asc")
+    else books = Book.where(is_read: name)
+    end
+
+    book = books[command.to_i - 1]
+    book ? view(book) : (puts "Invalid selection")
   end
 
   def find_by_is_read
@@ -42,6 +62,7 @@ class BooksController
       books.each_with_index do |book, index|
         puts "#{index + 1}. #{book.title} by #{book.authors.first.name}"
       end
+      route("is_read", status)
     else
       puts "Unable to find books that are #{status}, please try again"
       Router.find_book
@@ -49,12 +70,14 @@ class BooksController
   end
 
   def find_by_title
+    puts "What title would you like to search for?"
     title = clean_gets
-    books = Book.where(title: "#{title}").all
+    books = Book.where(title: title).all
     if books.length >= 1
       books.each_with_index do |book, index|
         puts "#{index + 1}. #{book.title} by #{book.authors.first.name}"
       end
+      route("title", title)
     else
       puts "Unable to find books with the title #{title}, please try again"
       Router.find_book
@@ -68,10 +91,20 @@ class BooksController
     book.save
   end
 
+  def route(find_by, name)
+    puts "Enter number to view a book's details or DONE to finish"
+    command = clean_gets
+    case command
+    when "Done" then puts "Thanks for using BookBank!"
+    when /\d+/ then find_by_index(command, find_by, name)
+    else puts "I don't know the #{command} command"
+    end
+  end
+
   def update_is_read(book)
     book_name = book.title
     status = clean_gets
-    book.update(is_read: "#{status}")
+    book.update(is_read: status)
     puts "#{book_name} has been marked as read" if status == "Y"
     puts "#{book_name} has been marked as not read" if status == "N"
   end
@@ -88,5 +121,19 @@ class BooksController
     title = clean_gets
     book.update(title: title)
     puts "#{book.title} has been successfully updated!"
+  end
+
+  def view(book)
+    puts book.title
+    puts "By:"
+    book.authors.each do |author|
+       puts author.name
+    end
+    puts "Genre:"
+    book.genres.each do |genre|
+      puts genre.name
+    end
+    puts "Description: #{book.description}"
+    book.is_read == "Y" ? (puts "#{book.title} has been read") : (puts "#{book.title} has not been read")
   end
 end
