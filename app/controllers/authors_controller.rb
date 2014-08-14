@@ -1,6 +1,6 @@
 class AuthorsController
 
-  def add
+  def self.add
     name = clean_gets
     if Author.where(name: name).exists?
       Author.where(name: name).first
@@ -9,7 +9,7 @@ class AuthorsController
     end
   end
 
-  def find_by_author
+  def self.find_by_author
     puts "What is the author's name?"
     name = clean_gets
     author = Author.where(name: name).first
@@ -18,15 +18,14 @@ class AuthorsController
       books.each_with_index do | book, index |
         puts "#{index + 1}. #{book.title}"
       end
-      books_controller = BooksController.new()
-      books_controller.route("author", name)
+      BooksController.route("author", name)
     else
       puts "Unable to find books by #{name}, please try again"
       Router.find_book
     end
   end
 
-  def update_author_name
+  def self.update_author_name
     puts "Who would you like to update?"
     name = clean_gets
     author = Author.where(name: name).first

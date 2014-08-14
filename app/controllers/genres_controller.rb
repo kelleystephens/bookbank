@@ -1,6 +1,6 @@
 class GenresController
 
-  def add
+  def self.add
     name = clean_gets
     if Genre.where(name: name).exists?
       Genre.where(name: name).first
@@ -9,7 +9,7 @@ class GenresController
     end
   end
 
-  def find_by_genre
+  def self.find_by_genre
     puts "What is the genre?"
     name = clean_gets
     genre = Genre.where(name: name).first
@@ -18,8 +18,7 @@ class GenresController
       books.each_with_index do |book, index|
         puts "#{index + 1}. #{book.title} by #{book.authors.first.name}"
       end
-      books_controller = BooksController.new()
-      books_controller.route("genre", name)
+      BooksController.route("genre", name)
     else
       puts "Unable to find books with the genre #{name}, please try again"
       Router.find_book

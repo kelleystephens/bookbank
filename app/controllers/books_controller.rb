@@ -1,24 +1,24 @@
 class BooksController
 
-  def add
+  def self.add
     title = clean_gets
     Book.create(title: title)
   end
 
-  def delete_book(title, author_name)
+  def self.delete_book(title, author_name)
     book = Author.where(name: author_name).first.books.where(title: title).first
     book.destroy
     puts "Book deleted!"
   end
 
-  def describe
+  def self.describe
     description = clean_gets
     book = Book.last
     book.description = description
     book.save
   end
 
-  def find_all
+  def self.find_all
     books = Book.all.order("title asc")
     if books.length >=1
       books.each_with_index do | book, index |
@@ -30,7 +30,7 @@ class BooksController
     end
   end
 
-  def find_book(title, author_name)
+  def self.find_book(title, author_name)
     author = Author.where(name: author_name).first
     if author
       author.books.where(title: title).first
@@ -40,7 +40,7 @@ class BooksController
     end
   end
 
-  def find_by_index(command, find_by, name)
+  def self.find_by_index(command, find_by, name)
     case find_by
     when "all" then books = Book.all.order("title asc")
     when "author" then books = Author.where(name: name).first.books.order("title asc")
@@ -53,7 +53,7 @@ class BooksController
     book ? view(book) : (puts "Invalid selection")
   end
 
-  def find_by_is_read
+  def self.find_by_is_read
     puts "Search books that are: Read or Unread?"
     status = clean_gets
     status == "Read" ? status = "Y" : status = "N"
@@ -69,7 +69,7 @@ class BooksController
     end
   end
 
-  def find_by_title
+  def self.find_by_title
     puts "What title would you like to search for?"
     title = clean_gets
     books = Book.where(title: title).all
@@ -84,14 +84,14 @@ class BooksController
     end
   end
 
-  def is_read?
+  def self.is_read?
     answer = clean_gets
     book = Book.last
     book.is_read = answer
     book.save
   end
 
-  def route(find_by, name)
+  def self.route(find_by, name)
     puts "Enter number to view a book's details or DONE to finish"
     command = clean_gets
     case command
@@ -101,7 +101,7 @@ class BooksController
     end
   end
 
-  def update_is_read(book)
+  def self.update_is_read(book)
     book_name = book.title
     status = clean_gets
     book.update(is_read: status)
@@ -109,21 +109,21 @@ class BooksController
     puts "#{book_name} has been marked as not read" if status == "N"
   end
 
-  def update_description(book)
+  def self.update_description(book)
     puts "What is the new description for #{book.title}?"
     description = clean_gets
     book.update(description: description)
     puts "#{book.title} has been successfully updated!"
   end
 
-  def update_title(book)
+  def self.update_title(book)
     puts "What would you like to change the title to?"
     title = clean_gets
     book.update(title: title)
     puts "#{book.title} has been successfully updated!"
   end
 
-  def view(book)
+  def self.view(book)
     puts book.title
     puts "By:"
     book.authors.each do |author|
